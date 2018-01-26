@@ -1,0 +1,5 @@
+package arrows
+
+trait Arrow {
+
+}

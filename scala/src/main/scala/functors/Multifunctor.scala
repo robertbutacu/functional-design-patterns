@@ -1,5 +1,0 @@
-package functors
-
-trait Multifunctor {
-
-}

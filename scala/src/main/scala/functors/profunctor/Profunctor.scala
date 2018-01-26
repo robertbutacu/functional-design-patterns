@@ -1,5 +1,5 @@
 package functors.profunctor
 
-class profunctor {
+trait Profunctor {
 
 }

@@ -1,5 +1,5 @@
 package functors.functor
 
-trait Functor[A] {
-  def fmap[B](f: A => B): B
+trait Functor[F[_]] {
+  def fmap[A, B](fa: F[A])(f: A => B): F[B]
 }

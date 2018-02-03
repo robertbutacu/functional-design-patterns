@@ -10,5 +10,5 @@ package functors.functor
   *     fmap(f compose g, adt) === fmap(f, fmap(g, adt))
   */
 trait Functor[F[_]] {
-  def fmap[A, B](fa: F[A])(f: A => B): F[B]
+  def fmap[A, B](fA: F[_])(f: A => B): F[B]
 }

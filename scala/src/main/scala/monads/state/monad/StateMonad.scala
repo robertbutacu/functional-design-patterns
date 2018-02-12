@@ -6,6 +6,6 @@ package monads.state.monad
   *   state monads deal with maintaining previous states WHILE generating new ones.
  */
 
-trait StateMonad[T, +A] {
-  def apply[S, A](f: S => (S, A)): StateMonad[S, A]
+trait StateMonad[S, A] {
+  def apply(f: S => (S, A)): StateMonad[S, A]
 }

@@ -1,5 +1,7 @@
 package functors.bifunctor
 
+import scala.language.higherKinds
+
 /**
   *
   *  Similar to a functor, the BiFunctor must satisfy the functor laws:
@@ -16,9 +18,23 @@ package functors.bifunctor
   *   BiFunctors include: Either, N-Tuples
   */
 trait BiFunctor[F[_, _]] {
-  def biMap[A, B, C, D](fab: F[A, B])(f: A => C)(g: B => D): F[B, D]
+  def biMap[A, B, C, D](input: F[A, B])(f: A => C)(g: B => D): F[C, D]
 
-  def first[A, C](fab: F[A, _])(f: A => C): F[C, _]
+  def first[A, C](input: F[A, _])(f: A => C): F[C, _]
 
-  def second[B, D](fab: F[_, B])(f: B => D): F[_, D]
+  def second[B, D](input: F[_, B])(f: B => D): F[_, D]
+}
+
+object BiFunctor {
+  implicit def eitherBiFunctor: BiFunctor[Either] = new BiFunctor[Either] {
+    override def biMap[A, B, C, D](input: Either[A, B])(f: A => C)(g: B => D): Either[C, D] = {
+      input.left.map(f).right.map(g)
+    }
+
+    override def first[A, C](input: Either[A, _])(f: A => C): Either[C, _] =
+      input.left.map(f)
+
+    override def second[B, D](input: Either[_, B])(g: B => D): Either[_, D] =
+      input.right.map(g)
+  }
 }

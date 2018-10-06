@@ -1,5 +1,7 @@
 package functors.applicative.functor
 
+import scala.language.higherKinds
+
 /**
   * Applicative is an intermediate between functor and monad.
   *
